@@ -1,0 +1,35 @@
+{
+  "mainFunnelSlug": "main-funnel",
+  "questions": [
+    {
+      "id": "gender",
+      "text": "What is your gender?",
+      "screenType": "radio",
+      "options": ["Male", "Female"],
+      "next": {
+        "Male": "relationship-status",
+        "Female": "relationship-status"
+      }
+    },
+    {
+      "id": "relationship-status",
+      "text": "So we can get to know you better, tell us about your relationship status.",
+      "screenType": "radio",
+      "options": ["Single", "In a relationship"],
+      "next": {
+        "Single": "single-parent",
+        "In a relationship": "parent"
+      }
+    },
+    {
+      "id": "single-parent",
+      "text": "Are you a single parent?",
+      "screenType": "radio",
+      "options": ["Yes", "No"],
+      "next": {
+        "Yes": "results",
+        "No": "results"
+      }
+    }
+  ]
+}
