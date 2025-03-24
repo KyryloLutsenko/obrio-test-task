@@ -19,12 +19,21 @@ This is a test task for a Frontend Developer role.
    cd obrio-test-task
 
 3. Install dependencies:
+
+```bash
    npm install
+```
 
 4. Start the dev server:
-   npm run dev
 
-5. Start the prod server
+```bash
+   npm run dev
+```
+
+5. Start the prod server:
+
+```bash
    npm run buld && npm run start
+```
 
 6. Open in the browser: http://localhost:3000
