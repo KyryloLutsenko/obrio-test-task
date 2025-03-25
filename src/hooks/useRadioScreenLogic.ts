@@ -5,6 +5,7 @@ import { ROUTES } from '@/constants/routes';
 import { replaceVariables } from '@/utils/replaceVariables';
 import { TFunnelScreenLogicProps } from '@/types/funnelTypes';
 
+// TODO: Make it universal for both cases (useInfoScreenLogic)
 export const useRadioScreenLogic = ({ funnelSlug, question, onNext }: TFunnelScreenLogicProps) => {
   const dispatch = useDispatch();
   const answers = useSelector((state: RootState) => state.mainFunnel[funnelSlug] || {});

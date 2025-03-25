@@ -4,16 +4,12 @@ import { ROUTES } from '@/constants/routes';
 import { replaceVariables } from '@/utils/replaceVariables';
 import { TFunnelScreenLogicProps, TNextPath } from '@/types/funnelTypes';
 
+// TODO: Make it universal for both cases (useRadioScreenLogic)
 export const useInfoScreenLogic = ({ funnelSlug, question, onNext }: TFunnelScreenLogicProps) => {
   const answers = useSelector((state: RootState) => state.mainFunnel[funnelSlug] || {});
 
   const handleNext = () => {
     const defaultOption = question.options?.[0] || 'Next';
-
-    if (typeof question.next === 'string') {
-      onNext(question.next);
-      return;
-    }
 
     const nextStep = question.next[defaultOption] as TNextPath;
 

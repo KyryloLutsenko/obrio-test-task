@@ -1,7 +1,7 @@
 'use client';
 
 import { screenMap } from '@/constants/screenMap';
-import { useNavigationHandler } from '@/hooks/helpers';
+import { useNavigationHandler } from '@/hooks/useNavigationHandler';
 
 import { TScreenRendererProps } from '.';
 

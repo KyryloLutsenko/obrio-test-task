@@ -8,11 +8,9 @@ type TConditions = {
 
 export type TNextPath = string | TConditions;
 
-export type TNext =
-  | string
-  | {
-      [key: string]: TNextPath | undefined;
-    };
+export type TNext = {
+  [key: string]: TNextPath | undefined;
+};
 
 export type TQuestionProps = {
   id: string;

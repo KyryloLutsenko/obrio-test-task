@@ -1,6 +1,7 @@
 type Answers = Record<string, string>;
 
 const evaluateCondition = (condition: string, answers: Answers): boolean => {
+  // TODO: Move all strings to some consts
   if (condition.includes('have children')) {
     return answers['parent'] === 'Yes' || answers['single-parent'] === 'Yes';
   }

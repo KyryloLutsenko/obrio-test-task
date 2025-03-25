@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/navigation';
 import { Typography, List } from '@mui/material';
@@ -14,17 +14,19 @@ import LoadingScreen from '@/components/common/LoadingScreen';
 import { StyledContainer, StyledListItem } from './MainFunnelResults.styles';
 
 const MainFunnelResults = () => {
-  const mainFunnelAnswersObject = useSelector((state: RootState) => state.mainFunnel);
   const router = useRouter();
   const dispatch = useDispatch();
+  const answers = useSelector(
+    (state: RootState) => state.mainFunnel[mainFunnelData.mainFunnelSlug],
+  );
 
-  const answers = mainFunnelAnswersObject[mainFunnelData.mainFunnelSlug];
+  const isNoAnswers = useMemo(() => !answers && !Object.keys(answers).length, [answers]);
 
   useEffect(() => {
-    if (!answers || Object.keys(answers).length === 0) {
+    if (isNoAnswers) {
       router.replace('/');
     }
-  }, [answers, router]);
+  }, [router, isNoAnswers]);
 
   const handleReset = useCallback(() => {
     dispatch(resetAnswers({ funnelSlug: mainFunnelData.mainFunnelSlug }));
@@ -32,20 +34,40 @@ const MainFunnelResults = () => {
     router.push('/');
   }, [dispatch, router]);
 
-  if (!answers || Object.keys(answers).length === 0) {
+  const isLoading = useMemo(() => isNoAnswers, [isNoAnswers]);
+
+  const formattedAnswers = useMemo(() => {
+    if (!answers) return [];
+
+    return Object.entries(answers).map(([key, value]) => ({
+      formattedKey: formatResultKey(key),
+      value,
+    }));
+  }, [answers]);
+
+  if (isLoading) {
     return <LoadingScreen />;
   }
-
-  const mainFunnelAnswersArray = Object.entries(answers);
 
   return (
     <StyledContainer>
       <Typography variant="h4">Results:</Typography>
       <List>
-        {mainFunnelAnswersArray.map(([key, value]) => (
-          <StyledListItem key={key}>
-            <Typography fontWeight="bold" sx={{ fontSize: '1rem', textDecoration: 'underline' }}>
-              {formatResultKey(key)}:
+        {formattedAnswers.map(({ formattedKey, value }) => (
+          // TODO: Create a separate component for list item
+          // TODO: Create styled component for Typography
+          <StyledListItem key={formattedKey}>
+            <Typography
+              fontWeight="bold"
+              sx={{
+                fontSize: '1rem',
+                textDecoration: 'underline',
+                '&::first-letter': {
+                  textTransform: 'uppercase',
+                },
+              }}
+            >
+              {formattedKey}:
             </Typography>
             <Typography variant="body1" sx={{ fontSize: '1rem', fontStyle: 'italic' }}>
               {value}

@@ -1,18 +1,20 @@
 'use client';
 
+import { Box } from '@mui/material';
+
 import FunneStarter from '@/components/common/FunnelStarter';
 
 import mainFunnelData from '@/data/mainFunnelData.json';
 
 const Home = () => (
-  <div suppressHydrationWarning>
+  <Box>
     <FunneStarter
       title="Welcome to the Nebula"
       description="We want to know more about you"
       funnelData={mainFunnelData}
       buttonTitle="Start Quiz"
     />
-  </div>
+  </Box>
 );
 
 export default Home;

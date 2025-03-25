@@ -33,7 +33,13 @@ This is a test task for a Frontend Developer role.
 5. Start the prod server:
 
 ```bash
-   npm run buld && npm run start
+   npm run prod
+```
+
+or
+
+```bash
+npm run build && npm run start
 ```
 
 6. Open in the browser: http://localhost:3000
