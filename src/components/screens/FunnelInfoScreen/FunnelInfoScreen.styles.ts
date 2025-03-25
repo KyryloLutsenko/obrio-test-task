@@ -1,7 +1,7 @@
 import { styled } from '@mui/material/styles';
-import { FormControl, FormLabel, Box, Button as MUIButton, Typography } from '@mui/material';
+import { Box, Button as MUIButton, Typography } from '@mui/material';
 
-export const StyledContainer = styled(Box)(() => ({
+export const StyledContainer = styled(Box)(({ theme }) => ({
   position: 'relative',
   display: 'flex',
   flexDirection: 'column',
@@ -9,6 +9,13 @@ export const StyledContainer = styled(Box)(() => ({
   padding: '1rem',
   height: '100vh',
   width: '100%',
+  background: theme.palette.background.default,
+}));
+
+export const StyledScreenBlock = styled(Box)(() => ({
+  width: '20.5rem',
+  marginTop: '2.5rem',
+  textAlign: 'center',
 }));
 
 export const StyledMUIButton = styled(MUIButton)(({ theme }) => ({
@@ -25,20 +32,16 @@ export const StyledMUIButton = styled(MUIButton)(({ theme }) => ({
   },
 }));
 
-export const StyledFormControl = styled(FormControl)(() => ({
-  display: 'flex',
-  flexDirection: 'column',
-  width: '20.5rem',
-  marginTop: '2.5rem',
-}));
-
-export const StyledFormLabel = styled(FormLabel)(({ theme }) => ({
+export const StyledTitle = styled(Typography)(({ theme }) => ({
   ...theme.typography.h4,
-  color: theme.palette.text.primary,
+  color: theme.palette.text.secondary,
+  marginBottom: '1.25rem',
+  textAlign: 'center',
 }));
 
 export const StyledDescription = styled(Typography)(({ theme }) => ({
-  ...theme.typography.h6,
-  marginTop: '1rem',
+  fontSize: '0.875rem',
+  color: theme.palette.text.secondary,
+  marginBottom: '1.25rem',
   textAlign: 'center',
 }));

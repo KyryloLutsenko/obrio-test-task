@@ -11,7 +11,7 @@ export const metadata = {
 };
 
 const RootLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  <html lang="en" className={openSans.className}>
+  <html lang="en" className={openSans.className} suppressHydrationWarning>
     <body>
       <ClientProviders>{children}</ClientProviders>
     </body>

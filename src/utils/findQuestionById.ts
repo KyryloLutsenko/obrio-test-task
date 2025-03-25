@@ -1,6 +1,8 @@
 import mainFunnelData from '@/data/mainFunnelData.json';
-import { TQuestionProps } from '@/types/questionTypes';
+import { TQuestionProps } from '@/types/funnelTypes';
+import { TMainFunnelData } from '@/types/funnelTypes';
 
-export function findQuestionById(questionId: string): TQuestionProps | undefined {
-  return mainFunnelData.questions.find((q) => q.id === questionId);
-}
+const typedMainFunnelData = mainFunnelData as TMainFunnelData;
+
+export const findQuestionById = (questionId: string): TQuestionProps | undefined =>
+  typedMainFunnelData.questions.find((q) => q.id === questionId);

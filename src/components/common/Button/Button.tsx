@@ -1,28 +1,27 @@
 import React from 'react';
-
+import { CircularProgress } from '@mui/material';
 import { StyledButton } from './Button.styles';
-
 import { TButtonProps } from '.';
 
 const Button: React.FC<TButtonProps> = ({
   children,
-  size,
-  centered,
-  background,
+
+  fullWidth,
   fullWidthMob,
-  textColor,
+  loading,
+  disabled,
+  isAlternative,
   ...props
 }) => {
   return (
     <StyledButton
-      size={size}
       {...props}
-      $centered={centered}
-      $background={background}
       $fullWidthMob={fullWidthMob}
-      $color={textColor}
+      $fullWidth={fullWidth}
+      $isAlternative={isAlternative}
+      disabled={loading || disabled}
     >
-      {children}
+      {loading ? <CircularProgress size={24} color="inherit" /> : children}
     </StyledButton>
   );
 };

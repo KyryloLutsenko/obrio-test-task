@@ -1,4 +1,4 @@
-import { TQuestionProps } from '@/types/questionTypes';
+import { TQuestionProps } from '@/types/funnelTypes';
 
 export type TFunnelScreenProps = {
   question: TQuestionProps;

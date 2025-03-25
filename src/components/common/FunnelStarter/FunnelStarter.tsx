@@ -1,9 +1,11 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { Container, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 
 import Button from '@/components/common/Button';
+
+import { StyledContainer } from './FunnelStarter.styles';
 
 import { TFunnelStarterProps } from '.';
 
@@ -23,18 +25,17 @@ const FunnelStarter: React.FC<TFunnelStarterProps> = ({
   };
 
   return (
-    <Container
-      maxWidth="sm"
-      sx={{ mt: 10, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1 }}
-    >
-      <Typography variant="h2" gutterBottom>
+    <StyledContainer>
+      <Typography variant="h4" sx={{ marginBottom: '0.5rem' }}>
         {title}
       </Typography>
-      <Typography variant="body1">{description}</Typography>
-      <Button variant="contained" color="primary" onClick={handleStart}>
+      <Typography variant="body1" sx={{ marginBottom: '1rem' }}>
+        {description}
+      </Typography>
+      <Button variant="contained" color="primary" onClick={handleStart} fullWidth>
         {buttonTitle}
       </Button>
-    </Container>
+    </StyledContainer>
   );
 };
 

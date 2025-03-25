@@ -1,11 +1,11 @@
 {
-  "mainFunnelSlug": "main-funnel",
+  "mainFunnelSlug": "start-quiz",
   "questions": [
     {
       "id": "gender",
-      "text": "What is your gender?",
+      "text": "Select your gender?",
       "screenType": "radio",
-      "options": ["Male", "Female"],
+      "options": ["Female", "Male"],
       "next": {
         "Male": "relationship-status",
         "Female": "relationship-status"
@@ -27,8 +27,186 @@
       "screenType": "radio",
       "options": ["Yes", "No"],
       "next": {
-        "Yes": "results",
-        "No": "results"
+        "Yes": "single-problem",
+        "No": "single-problem"
+      }
+    },
+    {
+      "id": "parent",
+      "text": "Are you a parent?",
+      "screenType": "radio",
+      "options": ["Yes", "No"],
+      "next": {
+        "Yes": "in-a-relationship-problem",
+        "No": "in-a-relationship-problem"
+      }
+    },
+    {
+      "id": "single-problem",
+      "text": "Single {gender} {who have children (if have children)} need a slightly different approach to improve their relationship. Which statement best describes you?",
+      "screenType": "radio",
+      "options": [
+        "I was unhappy with low things were going in my relationship",
+        "I was unhappy with parts of my relationship, but some thing were working",
+        "I was generally happy with my relationship",
+        "I’ve never been in a relationship"
+      ],
+      "next": {
+        "I was unhappy with low things were going in my relationship": "traits-tend-to-overthink",
+        "I was unhappy with parts of my relationship, but some thing were working": "traits-tend-to-overthink",
+        "I was generally happy with my relationship": "traits-tend-to-overthink",
+        "I’ve never been in a relationship": "traits-tend-to-overthink"
+      }
+    },
+    {
+      "id": "in-a-relationship-problem",
+      "text": "{Gender} {who have children (if have children)} need a slightly different approach to find their perfect partner. But first, how did you feel in your last relationship?",
+      "screenType": "radio",
+      "options": [
+        "I’m very unhappy with how things are going in my relationship",
+        "I’m unhappy with parts of my relationship, but some things are working well",
+        "I’m generally happy in my relationship"
+      ],
+      "next": {
+        "I’m very unhappy with how things are going in my relationship": "partner-introvert-or-extrovert",
+        "I’m unhappy with parts of my relationship, but some things are working well": "partner-introvert-or-extrovert",
+        "I’m generally happy in my relationship": "partner-introvert-or-extrovert"
+      }
+    },
+    {
+      "id": "traits-tend-to-overthink",
+      "text": "Do you tend to overthink?",
+      "screenType": "radio",
+      "options": ["Yes", "No"],
+      "next": {
+        "Yes": "how-does-it-work",
+        "No": "how-does-it-work"
+      }
+    },
+    {
+      "id": "partner-introvert-or-extrovert",
+      "text": "Is your partner an introvert or extrovert?",
+      "screenType": "radio",
+      "options": ["Introvert", "Extrovert", "A bit of both"],
+      "next": {
+        "Introvert": "partner-gender",
+        "Extrovert": "partner-gender",
+        "A bit of both": "partner-gender"
+      }
+    },
+    {
+      "id": "how-does-it-work",
+      "text": "So how does it work?",
+      "description": "We analyze hundreds of data points to create your unique astrological blueprint. This is combined with AI to tailor-make your astrological insights, based on your answers. We’re going to change your relationship with astrology.",
+      "screenType": "info",
+      "options": ["Next"],
+      "next": {
+        "Next": {
+          "conditions": {
+            "traits-tend-to-overthink": {
+              "Yes": "traits-most-important",
+              "No": "traits-emotional-control"
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "partner-gender",
+      "text": "What is your partner’s gender?",
+      "screenType": "radio",
+      "options": ["Male", "Female"],
+      "next": {
+        "Male": "partner-priority",
+        "Female": "partner-priority"
+      }
+    },
+    {
+      "id": "traits-most-important",
+      "text": "What is most important to you?",
+      "screenType": "radio",
+      "options": ["Success", "Romance", "Stability", "Freedom"],
+      "next": {
+        "Success": "where-did-you-hear-about-us",
+        "Romance": "where-did-you-hear-about-us",
+        "Stability": "where-did-you-hear-about-us",
+        "Freedom": "where-did-you-hear-about-us"
+      }
+    },
+    {
+      "id": "partner-priority",
+      "text": "Do you agree with the statement below?",
+      "description": "“My partner and I make sex a priority in our relationship”",
+      "screenType": "radio",
+      "options": ["Strongly agree", "Agree", "Neutral", "Disagee", "Strongly disagree"],
+      "next": {
+        "Strongly agree": "think-about-relationship-goals",
+        "Agree": "think-about-relationship-goals",
+        "Neutral": "think-about-relationship-goals",
+        "Disagee": "think-about-relationship-goals",
+        "Strongly disagree": "think-about-relationship-goals"
+      }
+    },
+    {
+      "id": "traits-emotional-control",
+      "text": "Is emotional control tricky for you?",
+      "screenType": "radio",
+      "options": ["Yes", "Sometimes", "Rarely", "Not at all"],
+      "next": {
+        "Yes": "where-did-you-hear-about-us",
+        "Sometimes": "where-did-you-hear-about-us",
+        "Rarely": "where-did-you-hear-about-us",
+        "Not at all": "where-did-you-hear-about-us"
+      }
+    },
+    {
+      "id": "think-about-relationship-goals",
+      "text": "When you think about your relationship goals, you feel...?",
+      "screenType": "radio",
+      "options": [
+        "Optimistic! They are totally doable, with some guidance.",
+        "Cautious. I’ve struggled before, but I’m hopeful.",
+        "I’m feeling a little anxious, honestly."
+      ],
+      "next": {
+        "Optimistic! They are totally doable, with some guidance.": "where-did-you-hear-about-us",
+        "Cautious. I’ve struggled before, but I’m hopeful.": "where-did-you-hear-about-us",
+        "I’m feeling a little anxious, honestly.": "where-did-you-hear-about-us"
+      }
+    },
+    {
+      "id": "where-did-you-hear-about-us",
+      "text": "Where did you hear about us?",
+      "screenType": "radio",
+      "options": [
+        "Poster or Billboard",
+        "Friend or Family",
+        "Instagram",
+        "Direct Mail or Package Insert",
+        "Online TV or Streaming TV",
+        "TV",
+        "Radio",
+        "Search Engine (Google, Bing, etc.)",
+        "Newspaper or Magazine",
+        "Facebook",
+        "Blog Post or Website Review",
+        "Podcast",
+        "Influencer",
+        "Youtube",
+        "Pinterest",
+        "Other"
+      ],
+      "next": {
+        "Poster or Billboard": "results",
+        "Friend or Family": "results",
+        "Instagram": "results",
+        "Direct Mail or Package Insert": "results",
+        "Online TV or Streaming TV": "results",
+        "TV": "results",
+        "Radio": "results",
+        "Search Engine (Google, Bing, etc.)": "results",
+        "Newspaper or Magazine": "results",
+        "Facebook": "results"
       }
     }
   ]
