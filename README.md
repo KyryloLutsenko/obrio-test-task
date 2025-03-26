@@ -21,19 +21,19 @@ This is a test task for a Frontend Developer role.
 3. Install dependencies:
 
 ```bash
-   npm install
+npm install
 ```
 
 4. Start the dev server:
 
 ```bash
-   npm run dev
+npm run dev
 ```
 
 5. Start the prod server:
 
 ```bash
-   npm run prod
+npm run prod
 ```
 
 or
