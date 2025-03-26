@@ -1,24 +1,24 @@
-import React, { useCallback, useEffect, useMemo } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useEffect, useMemo, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
 import { Typography, List } from '@mui/material';
 
-import { persistor, RootState } from '@/store/store';
-import { resetAnswers } from '@/store/mainFunnelReducer';
+import { RootState } from '@/store/store';
 import mainFunnelData from '@/data/mainFunnelData.json';
 import { formatResultKey } from '@/utils/formatResultsKey';
 
 import Button from '@/components/common/Button';
 import LoadingScreen from '@/components/common/LoadingScreen';
+import ResultListItem from '@/components/MainFunnelResults/ResultListItem';
 
-import { StyledContainer, StyledListItem } from './MainFunnelResults.styles';
+import { StyledContainer } from './MainFunnelResults.styles';
 
 const MainFunnelResults = () => {
   const router = useRouter();
-  const dispatch = useDispatch();
   const answers = useSelector(
     (state: RootState) => state.mainFunnel[mainFunnelData.mainFunnelSlug],
   );
+  const [isButtonLoading, setIsButtonLoading] = useState(false);
 
   const isNoAnswers = useMemo(() => !answers && !Object.keys(answers).length, [answers]);
 
@@ -28,11 +28,10 @@ const MainFunnelResults = () => {
     }
   }, [router, isNoAnswers]);
 
-  const handleReset = useCallback(() => {
-    dispatch(resetAnswers({ funnelSlug: mainFunnelData.mainFunnelSlug }));
-    persistor.purge();
+  const handleReset = () => {
+    setIsButtonLoading(true);
     router.push('/');
-  }, [dispatch, router]);
+  };
 
   const isLoading = useMemo(() => isNoAnswers, [isNoAnswers]);
 
@@ -54,29 +53,10 @@ const MainFunnelResults = () => {
       <Typography variant="h4">Results:</Typography>
       <List>
         {formattedAnswers.map(({ formattedKey, value }) => (
-          // TODO: Create a separate component for list item
-          // TODO: Create styled component for Typography
-          <StyledListItem key={formattedKey}>
-            <Typography
-              fontWeight="bold"
-              sx={{
-                fontSize: '1rem',
-                textDecoration: 'underline',
-                '&::first-letter': {
-                  textTransform: 'uppercase',
-                },
-              }}
-            >
-              {formattedKey}:
-            </Typography>
-            <Typography variant="body1" sx={{ fontSize: '1rem', fontStyle: 'italic' }}>
-              {value}
-            </Typography>
-          </StyledListItem>
+          <ResultListItem key={formattedKey} formattedKey={formattedKey} value={value} />
         ))}
       </List>
-
-      <Button fullWidth onClick={handleReset}>
+      <Button fullWidth onClick={handleReset} loading={isButtonLoading}>
         Main page
       </Button>
     </StyledContainer>

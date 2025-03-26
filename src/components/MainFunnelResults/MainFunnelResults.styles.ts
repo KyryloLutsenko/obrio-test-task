@@ -1,5 +1,5 @@
 import { styled } from '@mui/material/styles';
-import { Box, ListItem } from '@mui/material';
+import { Box } from '@mui/material';
 
 export const StyledContainer = styled(Box)(() => ({
   display: 'flex',
@@ -10,11 +10,4 @@ export const StyledContainer = styled(Box)(() => ({
   height: '100vh',
   maxWidth: '22rem',
   margin: '0 auto',
-}));
-
-export const StyledListItem = styled(ListItem)(() => ({
-  display: 'flex',
-  flexDirection: 'column',
-  padding: '0px !important',
-  textAlign: 'center',
 }));

@@ -1,32 +1,21 @@
-type Answers = Record<string, string>;
+import { REGEXP_PATTERNS, REPLACE_LOGIC_STRINGS } from '@/constants/replaceVariablesLogic';
 
-const evaluateCondition = (condition: string, answers: Answers): boolean => {
-  // TODO: Move all strings to some consts
-  if (condition.includes('have children')) {
-    return answers['parent'] === 'Yes' || answers['single-parent'] === 'Yes';
-  }
-  return false;
-};
+import { TAnswersProps } from '@/types/funnelTypes';
 
-const formatGenderText = (gender: string, capitalize: boolean): string => {
-  const lowercased = gender.toLowerCase();
-  return capitalize ? lowercased.charAt(0).toUpperCase() + lowercased.slice(1) : lowercased;
-};
-
-export const replaceVariables = (text: string, answers: Answers): string => {
-  let result = text.replace(/{(\w+)}/g, (match, key) => {
-    if (key.toLowerCase() === 'gender') {
-      const capitalize = key.charAt(0) === key.charAt(0).toUpperCase();
-      return formatGenderText(answers['gender'] || '', capitalize);
-    }
-    return answers[key] || '';
+export const replaceVariables = (text: string, answers: TAnswersProps): string => {
+  // First, handle parent/single-parent replacement
+  let result = text.replace(REGEXP_PATTERNS.PARENT, (match, key) => {
+    return answers[key] === REPLACE_LOGIC_STRINGS.YES
+      ? REPLACE_LOGIC_STRINGS.HAS_CHILDREN
+      : REPLACE_LOGIC_STRINGS.EMPTY;
   });
 
-  result = result.replace(/{([^}]+?\(if [^}]+?\))}/g, (match, phrase) => {
-    const [textToShow, condition] = phrase.split('(if ').map((string: string) => string.trim());
-    const cleanCondition = condition.replace(')', '');
-
-    return evaluateCondition(cleanCondition, answers) ? textToShow : '';
+  // Then handle gender and other replacements
+  result = result.replace(REGEXP_PATTERNS.VARIABLES, (match, key) => {
+    if (key.toLowerCase() === REPLACE_LOGIC_STRINGS.GENDER) {
+      return answers[REPLACE_LOGIC_STRINGS.GENDER].toLowerCase() || REPLACE_LOGIC_STRINGS.EMPTY;
+    }
+    return answers[key] || REPLACE_LOGIC_STRINGS.EMPTY;
   });
 
   return result;

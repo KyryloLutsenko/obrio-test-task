@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 import Button from '@/components/common/Button';
 
-import { useInfoScreenLogic } from '@/hooks/useInfoScreenLogic';
+import { useFunnelScreenLogic } from '@/hooks/useFunnelScreenLogic';
 
 import {
   StyledContainer,
@@ -15,7 +15,7 @@ import {
 import { TFunnelScreenProps } from '@/types/screenTypes';
 
 const FunnelInfoScreen = ({ question, onNext, funnelSlug }: TFunnelScreenProps) => {
-  const { questionText, options, handleNext, handleGoBack } = useInfoScreenLogic({
+  const { questionText, options, handleGoBack, handleNext } = useFunnelScreenLogic({
     funnelSlug,
     question,
     onNext,

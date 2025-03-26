@@ -16,7 +16,7 @@ export type TQuestionProps = {
   id: string;
   text: string;
   description?: string;
-  screenType: string; // змінили на string замість literal type
+  screenType: string;
   options?: string[];
   next: TNext;
 };
@@ -31,3 +31,12 @@ export type TFunnelScreenLogicProps = {
   question: TQuestionProps;
   onNext: (nextId: string) => void;
 };
+
+export type TAnswersProps = Record<string, string>;
+
+type TQuestionsMap = Map<string, TQuestionProps>;
+
+export type TGetQuestionById = (
+  questionId: string,
+  questionsMap: TQuestionsMap,
+) => TQuestionProps | undefined;

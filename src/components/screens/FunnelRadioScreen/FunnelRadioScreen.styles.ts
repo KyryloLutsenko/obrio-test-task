@@ -35,6 +35,9 @@ export const StyledFormControl = styled(FormControl)(() => ({
 export const StyledFormLabel = styled(FormLabel)(({ theme }) => ({
   ...theme.typography.h4,
   color: theme.palette.text.primary,
+  '&::first-letter': {
+    textTransform: 'uppercase',
+  },
 }));
 
 export const StyledDescription = styled(Typography)(({ theme }) => ({

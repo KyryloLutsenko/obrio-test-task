@@ -2,7 +2,9 @@ import React from 'react';
 import { RadioGroup } from '@mui/material';
 import Image from 'next/image';
 
-import { useRadioScreenLogic } from '@/hooks/useRadioScreenLogic';
+import Button from '@/components/common/Button';
+
+import { useFunnelScreenLogic } from '@/hooks/useFunnelScreenLogic';
 
 import {
   StyledContainer,
@@ -11,11 +13,11 @@ import {
   StyledFormLabel,
   StyledMUIButton,
 } from './FunnelRadioScreen.styles';
+
 import { TFunnelScreenProps } from '@/types/screenTypes';
-import Button from '@/components/common/Button';
 
 const FunnelRadioScreen = ({ question, onNext, funnelSlug }: TFunnelScreenProps) => {
-  const { questionText, options, handleGoBack, handleNext } = useRadioScreenLogic({
+  const { questionText, options, handleGoBack, handleNext } = useFunnelScreenLogic({
     funnelSlug,
     question,
     onNext,
@@ -30,9 +32,10 @@ const FunnelRadioScreen = ({ question, onNext, funnelSlug }: TFunnelScreenProps)
           width={8.5}
           height={16}
           style={{ height: 'auto' }}
+          priority
         />
       </StyledMUIButton>
-      <Image src="/icons/black-logo.svg" alt="Nebula logo" width={16} height={16} />
+      <Image src="/icons/black-logo.svg" alt="Nebula logo" width={16} height={16} priority />
       <StyledFormControl>
         <StyledFormLabel>{questionText}</StyledFormLabel>
         <StyledDescription variant="body1">{question.description}</StyledDescription>

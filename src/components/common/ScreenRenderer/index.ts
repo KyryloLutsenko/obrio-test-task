@@ -1,7 +1,5 @@
-import { TQuestionProps } from '@/types/funnelTypes';
-
 export type TScreenRendererProps = {
-  question: TQuestionProps;
+  questionId: string;
   funnelSlug: string;
 };
 

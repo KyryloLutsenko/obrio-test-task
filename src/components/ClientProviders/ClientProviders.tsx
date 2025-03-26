@@ -4,9 +4,10 @@ import { Provider as ReduxProvider } from 'react-redux';
 import { StyledEngineProvider, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { GlobalStyles } from '@mui/material';
+import { PersistGate } from 'redux-persist/integration/react';
 
 import StyledComponentsRegistry from '@/app/registry';
-import { store } from '@/store/store';
+import { store, persistor } from '@/store/store';
 
 import { globalStyles } from '@/styles/globalStyles';
 import theme from '@/styles/theme';
@@ -17,9 +18,11 @@ const ClientProviders = ({ children }: { children: React.ReactNode }) => {
       <StyledComponentsRegistry>
         <ThemeProvider theme={theme}>
           <ReduxProvider store={store}>
-            <CssBaseline />
-            <GlobalStyles styles={globalStyles(theme)} />
-            {children}
+            <PersistGate loading={null} persistor={persistor}>
+              <CssBaseline />
+              <GlobalStyles styles={globalStyles(theme)} />
+              {children}
+            </PersistGate>
           </ReduxProvider>
         </ThemeProvider>
       </StyledComponentsRegistry>
